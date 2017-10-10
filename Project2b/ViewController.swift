@@ -22,6 +22,7 @@ class ViewController: UIViewController {
     var sightsJSON: JSON!
     var userHeading = 0.0
     var headingCount = 0
+    var pages = [UUID: String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -78,7 +79,35 @@ class ViewController: UIViewController {
     }
     
     func createSights() {
-        
+        for page in sightsJSON["query"]["pages"].dictionaryValue.values {
+            let locationLat = page["coordinates"][0]["lat"].doubleValue
+            let locationLon = page["coordinates"][0]["lon"].doubleValue
+            let location = CLLocation(latitude: locationLat, longitude: locationLon)
+            
+            let distance = Float(userLocation.distance(from: location))
+            
+            let azimuthFromUser = direction(from: userLocation, to: location)
+            
+            let angle = azimuthFromUser - userHeading
+            let angleRadians = deg2rad(angle)
+            
+            let rotationHorizontal = simd_float4x4(SCNMatrix4MakeRotation(Float(angleRadians), 1, 0, 0))
+            let rotationVertical = simd_float4x4(SCNMatrix4MakeRotation(-0.2 + Float(distance / 6000), 0, 1, 0))
+            
+            let rotation = simd_mul(rotationHorizontal, rotationVertical)
+            
+            guard let sceneView = self.view as? ARSKView else { return }
+            guard let frame = sceneView.session.currentFrame else { return }
+            let rotation2 = simd_mul(frame.camera.transform, rotation)
+            
+            var translation = matrix_identity_float4x4
+            translation.columns.3.z = -(distance / 200)
+            let transform = simd_mul(rotation2, translation)
+            
+            let anchor = ARAnchor(transform: transform)
+            sceneView.session.add(anchor: anchor)
+            pages[anchor.identifier] = page["title"].string ?? "Unknown"
+        }
     }
     
 }
@@ -87,8 +116,21 @@ class ViewController: UIViewController {
 extension ViewController: ARSKViewDelegate {
     func view(_ view: ARSKView, nodeFor anchor: ARAnchor) -> SKNode? {
         // Create and configure a node for the anchor added to the view's session.
+        let labelNode = SKLabelNode(text: pages[anchor.identifier])
+        labelNode.horizontalAlignmentMode = .center
+        labelNode.verticalAlignmentMode = .center
         
-        return nil
+        let size = labelNode.frame.size.applying(CGAffineTransform(scaleX: 1.1, y: 1.4))
+        
+        let backgroundNode = SKShapeNode(rectOf: size, cornerRadius: 10)
+        
+        backgroundNode.fillColor = UIColor(hue: CGFloat(GKRandomSource.sharedRandom().nextUniform()), saturation: 0.5, brightness: 0.4, alpha: 0.9)
+        backgroundNode.strokeColor = backgroundNode.fillColor.withAlphaComponent(1)
+        backgroundNode.lineWidth = 2
+        
+        backgroundNode.addChild(labelNode)
+        
+        return backgroundNode
     }
     
     func session(_ session: ARSession, didFailWithError error: Error) {

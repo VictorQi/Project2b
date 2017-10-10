@@ -15,6 +15,7 @@
 		5724961D1F8B69B700C58D42 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5724961B1F8B69B700C58D42 /* Main.storyboard */; };
 		5724961F1F8B69B700C58D42 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5724961E1F8B69B700C58D42 /* Assets.xcassets */; };
 		572496221F8B69B700C58D42 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 572496201F8B69B700C58D42 /* LaunchScreen.storyboard */; };
+		57B857771F8C67DE00E4917B /* Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B857761F8C67DE00E4917B /* Math.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +30,7 @@
 		5724961E1F8B69B700C58D42 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		572496211F8B69B700C58D42 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		572496231F8B69B700C58D42 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		57B857761F8C67DE00E4917B /* Math.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Math.swift; sourceTree = "<group>"; };
 		F599C41C52FC9E43C33AF0AA /* Pods-Project2b.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Project2b.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Project2b/Pods-Project2b.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -77,6 +79,7 @@
 				572496151F8B69B700C58D42 /* Scene.sks */,
 				572496171F8B69B700C58D42 /* Scene.swift */,
 				572496191F8B69B700C58D42 /* ViewController.swift */,
+				57B857761F8C67DE00E4917B /* Math.swift */,
 				5724961B1F8B69B700C58D42 /* Main.storyboard */,
 				5724961E1F8B69B700C58D42 /* Assets.xcassets */,
 				572496201F8B69B700C58D42 /* LaunchScreen.storyboard */,
@@ -227,6 +230,7 @@
 				5724961A1F8B69B700C58D42 /* ViewController.swift in Sources */,
 				572496181F8B69B700C58D42 /* Scene.swift in Sources */,
 				572496141F8B69B700C58D42 /* AppDelegate.swift in Sources */,
+				57B857771F8C67DE00E4917B /* Math.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -19,11 +19,11 @@ class Scene: SKScene {
         // Called before each frame is rendered
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard let sceneView = self.view as? ARSKView else {
-            return
-        }
-        
-        
-    }
+//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        guard let sceneView = self.view as? ARSKView else {
+//            return
+//        }
+//        
+//
+//    }
 }
